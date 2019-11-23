@@ -1,5 +1,6 @@
-import getRandomImage from "./nasa-api";
-import el from "./helpers";
+import getRandomImage from './nasa-api';
+import el from './helpers';
+import { save, load } from './storage';
 
 // todo vísa í rétta hluti með import
 
@@ -16,8 +17,8 @@ let image; // object sem inniheldur núverandi mynd á forsíðu.
  */
 function getNewImage() {
   const response = getRandomImage();
- 
-  response.then(function(result) {
+
+  response.then(function (result) {
     const parsedResult = JSON.parse(result);
 
     title.innerHTML = parsedResult['title'];
@@ -29,12 +30,12 @@ function getNewImage() {
       if (img.tagName === 'IMG') {
         const apod = img.parentElement;
         apod.removeChild(img);
-      
-        img = document.createElement('IFRAME');
-        img.width = "420";
-        img.height = "345";
 
-        apod.insertBefore(img, apod.firstChild)
+        img = document.createElement('IFRAME');
+        img.width = '420';
+        img.height = '345';
+
+        apod.insertBefore(img, apod.firstChild);
       }
     }
     else {
@@ -49,7 +50,7 @@ function getNewImage() {
     }
 
     img.src = parsedResult['url'];
-    
+ 
   });
 }
 
@@ -57,8 +58,7 @@ function getNewImage() {
  * Vistar núverandi mynd í storage.
  */
 function saveCurrentImage() {
-  const favourites = '<object type="text/html" data="favourites.html" ></object>';  
-  console.log(favourites)
+  save(image.type, image.mediaUrl, image.text, image.title);
 }
 
 /*
