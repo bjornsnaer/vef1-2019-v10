@@ -24,7 +24,6 @@ function getNewImage() {
     text.innerHTML = parsedResult['explanation'];
     img.src = parsedResult['url'];
 
-    console.log(img.tagName)
 
     if (parsedResult['media_type'] === 'video') {
       if (img.tagName === 'IMG') {

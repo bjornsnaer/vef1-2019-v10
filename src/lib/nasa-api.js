@@ -1,4 +1,4 @@
-import randomNumer from "./helpers";
+import randomNumer from './helpers';
 
 /**
  * Sækir Myndir frá nasa API. Til þess að sjá dæmi um json svari sjá apod.json
@@ -15,8 +15,8 @@ const URL = 'https://api.nasa.gov/planetary/apod?api_key=jSW85AbBBiMSfqNgmdAT3O3
  *
  * @returns {Promise} sem mun innihalda upplýsingar um mynd/myndband hjá nasa.
  */
+
 export default async function getRandomImage() {
-  
   const day = randomNumer(1, 28);
   const month = randomNumer(1, 12);
   const year = 2018;
@@ -24,13 +24,9 @@ export default async function getRandomImage() {
   const date = year.toString() + '-' + month.toString() + '-' + day.toString();
 
   const newURL = URL + '&date=' + date;
-
-  console.log(newURL);
-
   const xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", newURL, false ); // false for synchronous request
-  xmlHttp.send( null );
+
+  xmlHttp.open('GET', newURL, false);
+  xmlHttp.send(null);
   return xmlHttp.responseText;
-
-
 }
